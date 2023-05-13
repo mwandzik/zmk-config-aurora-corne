@@ -24,7 +24,7 @@
                         bindings = <
    &kp TAB      &kp Q    &kp W    &kp E    &kp R         &kp T              &kp Y    &kp U        &kp I      &kp O     &kp P      &kp BSPC
    &kp LSHFT    &kp A    &kp S    &kp D    &mt LSHFT F   &kp G              &kp H    &mt RSHFT J  &kp K      &kp L     &kp SEMI   &kp SQT
-   &kp LCTRL    &kp Z    &kp X    &kp C    &kp V         &kp B              &kp N    &kp M        &kp COMMA  &kp DOT   &kp FSLH   &kp ESC
+   &kp LCTRL    &kp Z    &kp X    &kp C    &kp V         &kp B              &kp N    &kp M        &kp COMMA  &kp DOT   &kp FSLH   &lt 3 ESC
                                   &kp LGUI &mo 1         &kp SPACE          &kp RET  &mo 2        &kp RALT
                         >;
                 };
@@ -59,5 +59,20 @@
                                  &kp LGUI   &trans     &kp SPACE           &kp RET     &trans      &kp RALT
                         >;
                 };
+                f_layer {
+//                      -----------------------------------------------------------------------------------------
+//                      |  TAB | F1  | F2  | F3  | F4  | F5  |             |     |     |     |     |     | BKSP |
+//                      | SHFT | F6  | F7  | F8  | F9  | F10 |             |     |     |     |     |     |      |
+//                      | CTRL | F11 | F12 | F13 | F14 | F15 |             |     |     |     |     |     |      |
+//                      -----------------------------------------------------------------------------------------
+//                                         | GUI |     | SPC |             | ENT |     | ALT |
+//                      -----------------------------------------------------------------------------------------
+                        bindings = <
+   &kp  TAB    &kp F1    &kp F2  &kp F3     &kp F4     &kp F5            &trans   &trans    &trans          &trans   &trans   &trans
+   &kp LSHFT   &kp F6    &kp F7  &kp F8     &kp F9     &kp F10           &trans   &trans    &trans          &trans   &trans   &trans
+   &kp LCTRL   &kp F11   &kp F12 &kp F13    &kp F14    &kp F15           &trans   &trans    &trans          &trans   &trans   &trans
+                                 &kp LGUI   &trans     &kp SPACE         &kp RET  &trans    &kp RALT
+                        >;
+                };                
         };
 };

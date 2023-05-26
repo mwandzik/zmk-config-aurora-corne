@@ -31,14 +31,14 @@
                 lower_layer {
 //                      -------------------------------------------------------------------------------------------
 //                      |  TAB |  1  |  2  |  3  |  4  |  5  |             |  6   |  7   |  8  |  9   |  0  | BKSP |
-//                      | CTRL | BT1 | BT2 | BT3 | BT4 | BT5 |             |      | BSPC | UP  | DEL  | USB | BTCLR|
+//                      | CTRL | BT1 | BT2 | BT3 |     |     |             |      | BSPC | UP  | DEL  | USB | BTCLR|
 //                      | CTRL |     |     |     |     |     |             | HOME | LFT  | DWN | RGT  | END | BLE  |
 //                      -------------------------------------------------------------------------------------------
 //                                         | GUI |     | SPC |             | ENT  |      | ALT |
 //                      -------------------------------------------------------------------------------------------
                         bindings = <
    &kp TAB      &kp N1       &kp N2        &kp N3       &kp N4       &kp N5               &kp N6     &kp N7    &kp N8     &kp N9      &kp N0         &kp BSPC
-   &kp LCTRL    &bt BT_SEL 0 &bt BT_SEL 1  &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4         &trans     &kp BSPC  &kp UP     &kp DEL     &out OUT_USB   &bt BT_CLR
+   &kp LCTRL    &bt BT_SEL 0 &bt BT_SEL 1  &bt BT_SEL 2 &trans       &trans               &trans     &kp BSPC  &kp UP     &kp DEL     &out OUT_USB   &bt BT_CLR
    &kp LCTRL    &trans       &trans        &trans       &trans       &trans               &kp HOME   &kp LEFT  &kp DOWN   &kp RIGHT   &kp END        &out OUT_BLE
                                            &kp LGUI     &trans       &kp SPACE            &kp RET    &trans    &kp RALT
                         >;

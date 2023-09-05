@@ -22,10 +22,10 @@
 //                                         | GUI | LWR   | SPC |         | ENT | RSE   | ALT |
 //                      -----------------------------------------------------------------------------------------
                         bindings = <
-   &kp TAB      &kp Q    &kp W    &kp E    &kp R                                &kp T              &kp Y    &kp U                             &kp I      &kp O     &kp P      &kp BSPC
-   &kp LCTRL    &kp A    &kp S    &kp D    &mt LSHFT F {tapping-term-ms: 500}      &kp G              &kp H    &mt RSHFT J {tapping-term-ms: 500}   &kp K      &kp L     &kp SEMI   &kp SQT
-   &lt 3 LCTRL    &kp Z    &kp X    &kp C    &kp V                              &kp B              &kp N    &kp M                             &kp COMMA  &kp DOT   &kp FSLH   &lt 3 ESC
-                                  &kp LGUI &mo 1         &kp SPACE                                 &kp RET  &mo 2                             &kp RALT
+   &kp TAB      &kp Q    &kp W    &kp E    &kp R                                &kp T              &kp Y    &kp U                                &kp I      &kp O     &kp P      &kp BSPC
+   &kp LCTRL    &kp A    &kp S    &kp D    &mt LSHFT F                          &kp G              &kp H    &mt RSHFT J                          &kp K      &kp L     &kp SEMI   &kp SQT
+   &lt 3 LCTRL    &kp Z    &kp X    &kp C    &kp V                              &kp B              &kp N    &kp M                                &kp COMMA  &kp DOT   &kp FSLH   &lt 3 ESC
+                                  &kp LGUI &mo 1         &kp SPACE                                 &kp RET  &mo 2                                &kp RALT
                         >;
                 };
                 lower_layer {

@@ -10,6 +10,18 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
+        behaviors {
+                // Define a custom mod-tap behavior with a longer tapping term
+                hm_shift: homerow_mod_shift {
+                        compatible = "zmk,behavior-hold-tap";
+                        label = "HOMEROW_MOD_SHIFT";
+                        #binding-cells = <2>;
+                        tapping-term-ms = <300>; // Increased from default 200ms
+                        flavor = "hold-preferred"; // Or choose another flavor if preferred
+                        bindings = <&kp>, <&kp>;
+                };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -23,7 +35,7 @@
 //                      -----------------------------------------------------------------------------------------
                         bindings = <
    &kp TAB      &kp Q    &kp W    &kp E    &kp R                                &kp T              &kp Y    &kp U                                &kp I      &kp O     &kp P      &kp BSPC
-   &kp LCTRL    &kp A    &kp S    &kp D    &mt LSHFT F                          &kp G              &kp H    &mt RSHFT J                          &kp K      &kp L     &kp SEMI   &kp SQT
+   &kp LCTRL    &kp A    &kp S    &kp D    &hm_shift LSHFT F                    &kp G              &kp H    &hm_shift RSHFT J                    &kp K      &kp L     &kp SEMI   &kp SQT
    &lt 3 LCTRL    &kp Z    &kp X    &kp C    &kp V                              &kp B              &kp N    &kp M                                &kp COMMA  &kp DOT   &kp FSLH   &lt 3 ESC
                                   &kp LGUI &mo 1         &kp SPACE                                 &kp RET  &mo 2                                &kp RALT
                         >;

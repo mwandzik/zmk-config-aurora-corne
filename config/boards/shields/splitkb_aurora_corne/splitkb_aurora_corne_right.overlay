@@ -1,0 +1,44 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+    chosen {
+        zmk,pointing-device = &pimoroni_trackball;
+        zmk,display = &oled;
+    };
+};
+
+&i2c0 {
+    status = "okay";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+    
+    pimoroni_trackball: trackball@0x0A {
+        compatible = "pimoroni,trackball";
+        reg = <0x0A>;
+        status = "okay";
+
+        /* Default parameters - can adjust these based on preference */
+        sensitivity = <64>;     /* Range: 0-255, higher = more sensitive */
+        invert-x;               /* Invert X axis movement - remove this line if not needed */
+        /* invert-y; */         /* Invert Y axis movement - uncomment if needed */
+    };
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <32>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        com-sequential;
+        prechargep = <0x22>;
+        status = "okay";
+    };
+};

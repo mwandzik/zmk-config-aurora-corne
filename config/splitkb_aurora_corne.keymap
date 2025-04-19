@@ -21,6 +21,28 @@
                         flavor = "hold-preferred"; // Or choose another flavor if preferred
                         bindings = <&kp>, <&kp>;
                 };
+
+                // Trackball configuration behaviors
+                trackball_button: trackball_button {
+                    compatible = "zmk,behavior-mouse-button";
+                    label = "TRACKBALL_BUTTON";
+                    #binding-cells = <0>;
+                    bindings = <&mkp LCLK>;
+                };
+                
+                trackball_fast: trackball_fast {
+                    compatible = "zmk,behavior-pointing-mode";
+                    label = "TRACKBALL_FAST";
+                    #binding-cells = <0>;
+                    bindings = <&mot 200>;  // Higher values = faster pointer movement
+                };
+
+                trackball_slow: trackball_slow {
+                    compatible = "zmk,behavior-pointing-mode";
+                    label = "TRACKBALL_SLOW";
+                    #binding-cells = <0>;
+                    bindings = <&mot 20>;  // Lower values = slower pointer movement
+                };
         };
 
         keymap {
@@ -87,16 +109,16 @@
                                  &kp LGUI   &mo 4      &kp SPACE         &kp KP_ENTER     &kp N0  &kp RALT
                         >;
                 };          
-                mouse_layer { // Layer 4 (Corrected)
+                mouse_layer { // Layer 4 (Enhanced with trackball settings)
 //                      -----------------------------------------------------------------------------------------
-//                      |     |     |     |     |     |     |         |     |     |     |     |     |      |
+//                      |     | Slow|     | Fast|     |     |         |     |     |     |     |     |      |
 //                      |     |     |     | RClk| LClk|     |         | ScU | ScL | MvU | ScR |     |      |
 //                      |     |     |     |     |     |     |         | ScD | MvL | MvD | MvR |     |      |
 //                      -----------------------------------------------------------------------------------------
 //                                         |     |     |     |         |     |     |     |
 //                      -----------------------------------------------------------------------------------------
                         bindings = <
-                &trans  &trans &trans &trans    &trans          &trans       &trans          &trans          &trans          &trans          &trans &trans
+                &trans  &trackball_slow &trans &trackball_fast &trans     &trans       &trans          &trans          &trans          &trans          &trans &trans
                 &trans  &trans &trans &mkp RCLK &mkp LCLK       &trans       &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT &trans &trans
                 &trans  &trans &trans &trans    &trans          &trans       &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans &trans
                                &trans &trans &trans                             &trans          &trans          &trans

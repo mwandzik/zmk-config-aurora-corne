@@ -22,7 +22,7 @@
                         bindings = <&kp>, <&kp>;
                 };
 
-                // Trackball configuration behaviors
+                // Trackball configuration behaviors - corrected to use valid ZMK behavior patterns
                 trackball_button: trackball_button {
                     compatible = "zmk,behavior-mouse-button";
                     label = "TRACKBALL_BUTTON";
@@ -30,18 +30,23 @@
                     bindings = <&mkp LCLK>;
                 };
                 
-                trackball_fast: trackball_fast {
-                    compatible = "zmk,behavior-pointing-mode";
-                    label = "TRACKBALL_FAST";
-                    #binding-cells = <0>;
-                    bindings = <&mot 200>;  // Higher values = faster pointer movement
+                // Using standard mouse movement with adjusted speed parameters
+                mmv_fast: mouse_move_fast {
+                    compatible = "zmk,behavior-mouse-move";
+                    label = "MOUSE_MOVE_FAST";
+                    #binding-cells = <1>;
+                    delay-ms = <0>;
+                    time-to-max-speed-ms = <0>; // Reach max speed instantly
+                    acceleration-exponent = <1>;
                 };
-
-                trackball_slow: trackball_slow {
-                    compatible = "zmk,behavior-pointing-mode";
-                    label = "TRACKBALL_SLOW";
-                    #binding-cells = <0>;
-                    bindings = <&mot 20>;  // Lower values = slower pointer movement
+                
+                mmv_slow: mouse_move_slow {
+                    compatible = "zmk,behavior-mouse-move";
+                    label = "MOUSE_MOVE_SLOW";
+                    #binding-cells = <1>;
+                    delay-ms = <0>;
+                    time-to-max-speed-ms = <500>; // Slow acceleration
+                    acceleration-exponent = <0>;  // Linear acceleration
                 };
         };
 
@@ -109,7 +114,7 @@
                                  &kp LGUI   &mo 4      &kp SPACE         &kp KP_ENTER     &kp N0  &kp RALT
                         >;
                 };          
-                mouse_layer { // Layer 4 (Enhanced with trackball settings)
+                mouse_layer { // Layer 4 (Corrected with valid ZMK behavior patterns)
 //                      -----------------------------------------------------------------------------------------
 //                      |     | Slow|     | Fast|     |     |         |     |     |     |     |     |      |
 //                      |     |     |     | RClk| LClk|     |         | ScU | ScL | MvU | ScR |     |      |
@@ -118,10 +123,10 @@
 //                                         |     |     |     |         |     |     |     |
 //                      -----------------------------------------------------------------------------------------
                         bindings = <
-                &trans  &trackball_slow &trans &trackball_fast &trans     &trans       &trans          &trans          &trans          &trans          &trans &trans
-                &trans  &trans &trans &mkp RCLK &mkp LCLK       &trans       &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT &trans &trans
-                &trans  &trans &trans &trans    &trans          &trans       &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans &trans
-                               &trans &trans &trans                             &trans          &trans          &trans
+                &trans  &trans &trans &trans    &trans     &trans       &trans          &trans          &trans          &trans          &trans &trans
+                &trans  &trans &trans &mkp RCLK &mkp LCLK  &trans       &msc SCRL_UP    &msc SCRL_LEFT  &mmv_fast MOVE_UP &msc SCRL_RIGHT &trans &trans
+                &trans  &trans &trans &trans    &trans     &trans       &msc SCRL_DOWN  &mmv_slow MOVE_LEFT &mmv_fast MOVE_DOWN &mmv_fast MOVE_RIGHT &trans &trans
+                               &trans &trans &trans                     &trans          &trans          &trans
                         >;
                 };
         };

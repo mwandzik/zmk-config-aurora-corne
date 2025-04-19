@@ -90,15 +90,15 @@
                 mouse_layer { // Layer 4 (Corrected)
 //                      -----------------------------------------------------------------------------------------
 //                      |     |     |     |     |     |     |         |     |     |     |     |     |      |
-//                      |     | RClk| LClk|     |     |     |         | ScU | ScL | MvU | ScR |     |      |
+//                      |     |     |     | RClk| LClk|     |         | ScU | ScL | MvU | ScR |     |      |
 //                      |     |     |     |     |     |     |         | ScD | MvL | MvD | MvR |     |      |
 //                      -----------------------------------------------------------------------------------------
 //                                         |     |     |     |         |     |     |     |
 //                      -----------------------------------------------------------------------------------------
                         bindings = <
-                &trans  &trans          &trans          &trans &trans &trans       &trans          &trans          &trans          &trans          &trans &trans
-                &trans  &mkp RCLK       &mkp LCLK       &trans &trans &trans       &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT &trans &trans
-                &trans  &trans          &trans          &trans &trans &trans       &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans &trans
+                &trans  &trans &trans &trans    &trans          &trans       &trans          &trans          &trans          &trans          &trans &trans
+                &trans  &trans &trans &mkp RCLK &mkp LCLK       &trans       &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT &trans &trans
+                &trans  &trans &trans &trans    &trans          &trans       &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT &trans &trans
                                &trans &trans &trans                             &trans          &trans          &trans
                         >;
                 };

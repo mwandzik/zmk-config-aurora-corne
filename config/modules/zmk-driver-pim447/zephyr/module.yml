@@ -3,4 +3,8 @@ build:
   cmake: .
   kconfig: Kconfig
   settings:
+    board_root: .
     dts_root: .
+    module_root: .
+    include:
+      - include/

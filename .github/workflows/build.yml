@@ -1,5 +1,82 @@
-on: [push, pull_request, workflow_dispatch]
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    name: Build Test
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:3.5
+    strategy:
+      fail-fast: false
+      matrix:
+        board:
+          - "nice_nano_v2"
+        shield:
+          - "splitkb_aurora_corne_left"
+          - "splitkb_aurora_corne_right"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Module Symlinks
+        run: |
+          mkdir -p dt-bindings/zmk
+          ln -sf ${GITHUB_WORKSPACE}/config/modules/zmk-driver-pim447/include/dt-bindings/zmk/trackball_pim447.h dt-bindings/zmk/
+          export C_INCLUDE_PATH=${GITHUB_WORKSPACE}:$C_INCLUDE_PATH
+
+      - name: Cache west modules
+        uses: actions/cache@v3
+        continue-on-error: true
+        env:
+          cache-name: cache-west-modules
+        with:
+          path: |
+            modules/
+            zephyr/
+            bootloader/
+            zmk/
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('manifest-dir/west.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: West Init
+        run: west init -l config
+
+      - name: West Update
+        run: west update
+
+      - name: West Zephyr export
+        run: west zephyr-export
+
+      - name: List Modules
+        run: |
+          echo "Listing modules:"
+          find . -name module.yml
+
+      - name: List Include Paths
+        run: |
+          echo "Contents of include directory:"
+          find . -name "*.h" | grep trackball
+
+      - name: West Build (${{ matrix.board}} / ${{ matrix.shield }})
+        run: west build -s zmk/app -d /tmp/tmp.${{ github.run_id }} -b ${{ matrix.board }} -- -DZMK_CONFIG=${GITHUB_WORKSPACE}/config -DSHIELD=${{ matrix.shield }}
+
+      - name: Store artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware-${{ matrix.board}}-${{ matrix.shield }}
+          path: |
+            /tmp/tmp.${{ github.run_id }}/zephyr/zmk.uf2
+            /tmp/tmp.${{ github.run_id }}/zephyr/.config

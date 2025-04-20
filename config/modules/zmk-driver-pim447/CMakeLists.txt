@@ -4,4 +4,5 @@
 if(CONFIG_ZMK_TRACKBALL_PIM447)
   zephyr_include_directories(include)
   add_subdirectory(src/drivers/sensor/trackball_pim447)
+  add_subdirectory(src/behaviors/behavior_trackball_mode)
 endif()

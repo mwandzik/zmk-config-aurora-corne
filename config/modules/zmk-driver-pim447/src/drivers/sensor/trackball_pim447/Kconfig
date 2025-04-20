@@ -17,4 +17,10 @@ config ZMK_TRACKBALL_PIM447_DEBUG
     help
       Enable debug logging for the Pimoroni trackball driver.
 
+config ZMK_BEHAVIOR_TRACKBALL_MODE
+    bool "Trackball mode behavior"
+    default y
+    help
+      Enable behavior to switch between cursor movement and scrolling modes for the trackball.
+
 endif # ZMK_TRACKBALL_PIM447

@@ -10,6 +10,11 @@
     chosen {
         zmk,display = &oled;
     };
+    
+    /* Add input split device for receiving trackball data from right half */
+    left_input_split_device {
+        compatible = "zmk,input-split-device";
+    };
 };
 
 &i2c0 {

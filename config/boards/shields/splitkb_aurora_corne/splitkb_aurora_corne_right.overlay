@@ -5,11 +5,23 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/zmk/input_transform.h>
 
 / {
     chosen {
         zmk,pointing-device = &pimoroni_trackball;
         zmk,display = &oled;
+    };
+
+    /* Add input listener for the trackball */
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&pimoroni_trackball>;
+    };
+    
+    /* Add input split device for sending trackball data to left half */
+    right_input_split_device {
+        compatible = "zmk,input-split-device";
     };
 };
 

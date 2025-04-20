@@ -9,7 +9,5 @@ manifest:
       import: app/west.yml
   self:
     path: config
-    userdata:
-      modules:
-        - name: zmk-driver-pim447
-          path: modules/zmk-driver-pim447
+    west-commands: scripts/west-commands.yml
+    import: modules/modules.yml

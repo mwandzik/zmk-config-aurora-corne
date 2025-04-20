@@ -1,0 +1,4 @@
+# This file registers the Pimoroni Trackball PIM447 driver module
+modules:
+  - name: zmk-driver-pim447
+    path: modules/zmk-driver-pim447

@@ -2,7 +2,10 @@
 # SPDX-License-Identifier: MIT
 
 if(CONFIG_ZMK_TRACKBALL_PIM447)
+  # Add include directory to make headers available
   zephyr_include_directories(include)
+  
+  # Add driver and behavior components
   add_subdirectory(src/drivers/sensor/trackball_pim447)
   add_subdirectory(src/behaviors/behavior_trackball_mode)
 endif()

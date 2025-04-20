@@ -6,17 +6,18 @@
 
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/zmk/input_transform.h>
+#include <dt-bindings/zmk/trackball_pim447.h>
 
 / {
     chosen {
-        zmk,pointing-device = &pimoroni_trackball;
+        zmk,pointing-device = &trackball_pim447;
         zmk,display = &oled;
     };
 
     /* Add input listener for the trackball */
     trackball_listener {
         compatible = "zmk,input-listener";
-        device = <&pimoroni_trackball>;
+        device = <&trackball_pim447>;
     };
     
     /* Add input split device for sending trackball data to left half */
@@ -29,15 +30,24 @@
     status = "okay";
     clock-frequency = <I2C_BITRATE_STANDARD>;
     
-    pimoroni_trackball: trackball@0x0A {
-        compatible = "pimoroni,trackball";
+    trackball_pim447: trackball@0x0A {
+        compatible = "pimoroni,trackball_pim447";
         reg = <0x0A>;
         status = "okay";
 
         /* Default parameters - can adjust these based on preference */
-        sensitivity = <64>;     /* Range: 0-255, higher = more sensitive */
-        invert-x;               /* Invert X axis movement - remove this line if not needed */
-        /* invert-y; */         /* Invert Y axis movement - uncomment if needed */
+        sensitivity = <64>;     /* Range: 1-255, higher = more sensitive */
+        move-factor = <2>;      /* Range: 1-10, scales cursor movement speed */
+        scroll-factor = <1>;    /* Range: 1-10, scales scrolling speed */
+        
+        /* LED color */
+        led-red = <0>;
+        led-green = <255>;
+        led-blue = <0>;
+        
+        /* Axis inversion */
+        invert-x;               /* Invert X axis movement */
+        /* invert-y; */         /* Uncomment to invert Y axis movement */
     };
 
     oled: ssd1306@3c {

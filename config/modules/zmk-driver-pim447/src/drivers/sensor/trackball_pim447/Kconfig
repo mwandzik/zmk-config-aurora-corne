@@ -1,10 +1,20 @@
 # Copyright (c) 2023-2025 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-config ZMK_TRACKBALL_PIM447
+menuconfig ZMK_TRACKBALL_PIM447
     bool "Pimoroni PIM447 trackball"
     default n
     depends on I2C
     depends on ZMK_POINTING
     help
       Enable I2C-based driver for Pimoroni PIM447 trackball.
+
+if ZMK_TRACKBALL_PIM447
+
+config ZMK_TRACKBALL_PIM447_DEBUG
+    bool "Debug logs for Pimoroni PIM447 trackball"
+    default n
+    help
+      Enable debug logging for the Pimoroni trackball driver.
+
+endif # ZMK_TRACKBALL_PIM447

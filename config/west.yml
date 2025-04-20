@@ -9,5 +9,3 @@ manifest:
       import: app/west.yml
   self:
     path: config
-    west-commands: scripts/west-commands.yml
-    import: modules/modules.yml
